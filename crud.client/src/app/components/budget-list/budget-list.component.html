@@ -1,0 +1,31 @@
+<h2>Lista de Budgets</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Usuário</th>
+            <th>Limite</th>
+            <th>Data de Início</th>
+            <th>Data de Término</th>
+            <th>Notificações Ativadas</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let budget of budgets">
+            <td>{{ budget.budgetId }}</td>
+            <td>{{ budget.userId }}</td> <!-- Isso poderia ser o nome do usuário se você carregar essa informação -->
+            <td>{{ budget.limit }}</td>
+            <td>{{ budget.startDate | date }}</td>
+            <td>{{ budget.endDate | date }}</td>
+            <td>{{ budget.notificationsEnabled ? 'Sim' : 'Não' }}</td>
+            <td>
+                <a [routerLink]="['/budgets/edit', budget.budgetId]" class="btn btn-primary">Editar</a>
+                <button (click)="deleteBudget(budget.budgetId)" class="btn btn-danger">Excluir</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<a routerLink="/budgets/create" class="btn btn-success">Criar Novo Budget</a>
