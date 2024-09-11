@@ -21,7 +21,6 @@ namespace Crud.Server.Controllers
         public async Task<ActionResult<IEnumerable<Budget>>> GetBudgets()
         {
             return await _context.Budgets
-                .Include(b => b.User) // Incluir o relacionamento com User
                 .ToListAsync();
         }
 
@@ -30,7 +29,6 @@ namespace Crud.Server.Controllers
         public async Task<ActionResult<Budget>> GetBudget(int id)
         {
             var budget = await _context.Budgets
-                .Include(b => b.User) // Incluir o relacionamento com User
                 .FirstOrDefaultAsync(b => b.BudgetId == id);
 
             if (budget == null)

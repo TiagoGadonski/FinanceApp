@@ -1,0 +1,32 @@
+<h2 *ngIf="isEditMode">Editar Item de Compras</h2>
+<h2 *ngIf="!isEditMode">Adicionar Novo Item de Compras</h2>
+
+<form (ngSubmit)="saveShoppingItem()">
+    <div class="form-group">
+        <label for="name">Nome</label>
+        <input id="name" [(ngModel)]="shoppingItem.name" name="name" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="quantity">Quantidade</label>
+        <input id="quantity" [(ngModel)]="shoppingItem.quantity" name="quantity" type="number" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="price">Preço</label>
+        <input id="price" [(ngModel)]="shoppingItem.price" name="price" type="number" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="isPurchased">Comprado</label>
+        <input id="isPurchased" [(ngModel)]="shoppingItem.isPurchased" name="isPurchased" type="checkbox" />
+    </div>
+
+    <div class="form-group">
+        <label for="priority">Prioridade</label>
+        <input id="priority" [(ngModel)]="shoppingItem.priority" name="priority" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+    <a routerLink="/shoppingitems" class="btn btn-secondary">Cancelar</a>
+</form>

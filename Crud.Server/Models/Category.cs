@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Crud.Server.Models
 {
@@ -10,6 +11,7 @@ namespace Crud.Server.Models
         public string Description { get; set; }
 
         // Relacionamentos
+        [JsonIgnore]
         public virtual ICollection<Transaction> Transactions { get; set; }
 
         public Category()

@@ -1,0 +1,73 @@
+<h2 *ngIf="isEditMode">Editar Transação</h2>
+<h2 *ngIf="!isEditMode">Adicionar Nova Transação</h2>
+
+<form (ngSubmit)="saveTransaction()">
+    <div class="form-group">
+        <label for="date">Data</label>
+        <input id="date" [(ngModel)]="transaction.date" name="date" type="date" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="amount">Valor</label>
+        <input id="amount" [(ngModel)]="transaction.amount" name="amount" type="number" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="description">Descrição</label>
+        <input id="description" [(ngModel)]="transaction.description" name="description" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="categoryId">Categoria</label>
+        <select id="categoryId" [(ngModel)]="transaction.categoryId" name="categoryId" class="form-control" required>
+            <option *ngFor="let category of categories" [ngValue]="category.categoryId">{{ category.name }}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="transactionType">Tipo de Transação</label>
+        <input id="transactionType" [(ngModel)]="transaction.transactionType" name="transactionType" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="paymentMethod">Método de Pagamento</label>
+        <input id="paymentMethod" [(ngModel)]="transaction.paymentMethod" name="paymentMethod" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="installments">Total de Parcelas</label>
+        <input id="installments" [(ngModel)]="transaction.totalInstallments" name="installments" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="installmentsPaid">Parcelas Pagas</label>
+        <input id="installmentsPaid" [(ngModel)]="transaction.installmentsPaid" name="installmentsPaid" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="installmentAmount">Valor da Parcela</label>
+        <input id="installmentAmount" [(ngModel)]="transaction.installmentAmount" name="installmentAmount" type="number" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="endDate">Data de Término</label>
+        <input id="endDate" [(ngModel)]="transaction.endDate" name="endDate" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="receiptImage">Imagem do Recibo</label>
+        <input id="receiptImage" [(ngModel)]="transaction.receiptImage" name="receiptImage" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="expenseType">Tipo de Despesa</label>
+        <select id="expenseType" [(ngModel)]="transaction.expenseType" name="expenseType" class="form-control" required>
+            <option [ngValue]="0">Fixa</option>
+            <option [ngValue]="1">Avulsa</option>
+            <option [ngValue]="2">Parcelada</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+    <a routerLink="/transactions" class="btn btn-secondary">Cancelar</a>
+</form>

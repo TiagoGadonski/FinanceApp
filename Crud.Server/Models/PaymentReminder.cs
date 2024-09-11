@@ -9,12 +9,7 @@ namespace Crud.Server.Models
         public DateTime DueDate { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
-        public int UserId { get; set; }
         public bool IsPaid { get; set; }
-
-        // Relacionamento
-        public virtual User User { get; set; }
-
         // Métodos auxiliares
         public void MarkAsPaid()
         {

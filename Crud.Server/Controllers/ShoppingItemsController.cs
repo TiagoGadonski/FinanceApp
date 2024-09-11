@@ -21,7 +21,6 @@ namespace Crud.Server.Controllers
         public async Task<ActionResult<IEnumerable<ShoppingItem>>> GetShoppingItems()
         {
             return await _context.ShoppingItems
-                .Include(si => si.User)  // Inclui o relacionamento com o User
                 .ToListAsync();
         }
 
@@ -30,7 +29,6 @@ namespace Crud.Server.Controllers
         public async Task<ActionResult<ShoppingItem>> GetShoppingItem(int id)
         {
             var shoppingItem = await _context.ShoppingItems
-                .Include(si => si.User)  // Inclui o relacionamento com o User
                 .FirstOrDefaultAsync(si => si.ItemId == id);
 
             if (shoppingItem == null)
@@ -45,13 +43,6 @@ namespace Crud.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<ShoppingItem>> PostShoppingItem(ShoppingItem shoppingItem)
         {
-            // Verifica se o User associado existe
-            var user = await _context.Users.FindAsync(shoppingItem.UserId);
-            if (user == null)
-            {
-                return BadRequest("User not found.");
-            }
-
             _context.ShoppingItems.Add(shoppingItem);
             await _context.SaveChangesAsync();
 
@@ -65,13 +56,6 @@ namespace Crud.Server.Controllers
             if (id != shoppingItem.ItemId)
             {
                 return BadRequest();
-            }
-
-            // Verifica se o User associado existe
-            var user = await _context.Users.FindAsync(shoppingItem.UserId);
-            if (user == null)
-            {
-                return BadRequest("User not found.");
             }
 
             _context.Entry(shoppingItem).State = EntityState.Modified;

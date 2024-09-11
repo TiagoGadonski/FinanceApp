@@ -1,0 +1,29 @@
+<h2>Lista de Itens de Compras</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>Preço</th>
+            <th>Comprado</th>
+            <th>Prioridade</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of shoppingItems">
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price | currency }}</td>
+            <td>{{ item.isPurchased ? 'Sim' : 'Não' }}</td>
+            <td>{{ item.priority }}</td>
+            <td>
+                <a [routerLink]="['/shoppingitems/edit', item.itemId]" class="btn btn-primary">Editar</a>
+                <button (click)="deleteShoppingItem(item.itemId)" class="btn btn-danger">Excluir</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<a routerLink="/shoppingitems/create" class="btn btn-success">Adicionar Novo Item</a>

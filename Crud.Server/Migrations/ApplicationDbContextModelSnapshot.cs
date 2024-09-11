@@ -35,12 +35,7 @@ namespace Crud.Server.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("BudgetId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Budgets");
                 });
@@ -83,12 +78,7 @@ namespace Crud.Server.Migrations
                     b.Property<bool>("IsPaid")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("ReminderId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("PaymentReminders");
                 });
@@ -120,12 +110,7 @@ namespace Crud.Server.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("ItemId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("ShoppingItems");
                 });
@@ -139,14 +124,13 @@ namespace Crud.Server.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("EndDate")
@@ -162,124 +146,35 @@ namespace Crud.Server.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("PaymentMethod")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ReceiptImage")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("TotalInstallments")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("TransactionType")
-                        .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("TransactionId");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Transactions");
-                });
-
-            modelBuilder.Entity("Crud.Server.Models.User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("LastLogin")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Crud.Server.Models.Budget", b =>
-                {
-                    b.HasOne("Crud.Server.Models.User", "User")
-                        .WithMany("Budgets")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Crud.Server.Models.PaymentReminder", b =>
-                {
-                    b.HasOne("Crud.Server.Models.User", "User")
-                        .WithMany("PaymentReminders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Crud.Server.Models.ShoppingItem", b =>
-                {
-                    b.HasOne("Crud.Server.Models.User", "User")
-                        .WithMany("ShoppingItems")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Crud.Server.Models.Transaction", b =>
                 {
                     b.HasOne("Crud.Server.Models.Category", "Category")
                         .WithMany("Transactions")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Crud.Server.Models.User", "User")
-                        .WithMany("Transactions")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Crud.Server.Models.Category", b =>
                 {
-                    b.Navigation("Transactions");
-                });
-
-            modelBuilder.Entity("Crud.Server.Models.User", b =>
-                {
-                    b.Navigation("Budgets");
-
-                    b.Navigation("PaymentReminders");
-
-                    b.Navigation("ShoppingItems");
-
                     b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618

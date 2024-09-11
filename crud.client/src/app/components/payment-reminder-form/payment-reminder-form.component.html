@@ -1,0 +1,27 @@
+<h2 *ngIf="isEditMode">Editar Lembrete de Pagamento</h2>
+<h2 *ngIf="!isEditMode">Criar Novo Lembrete de Pagamento</h2>
+
+<form (ngSubmit)="saveReminder()">
+    <div class="form-group">
+        <label for="dueDate">Data de Vencimento</label>
+        <input id="dueDate" [(ngModel)]="reminder.dueDate" name="dueDate" type="date" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="amount">Valor</label>
+        <input id="amount" [(ngModel)]="reminder.amount" name="amount" type="number" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="description">Descrição</label>
+        <input id="description" [(ngModel)]="reminder.description" name="description" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="isPaid">Pago</label>
+        <input id="isPaid" [(ngModel)]="reminder.isPaid" name="isPaid" type="checkbox" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+    <a routerLink="/paymentreminders" class="btn btn-secondary">Cancelar</a>
+</form>

@@ -10,7 +10,7 @@ import { Budget } from '../../models/budget';
 })
 export class BudgetFormComponent implements OnInit {
 
-  budget: Budget = { budgetId: 0, userId: 0, limit: 0, startDate: new Date(), endDate: new Date(), notificationsEnabled: false };
+  budget: Budget = { budgetId: 0, limit: 0, startDate: new Date(), endDate: new Date(), notificationsEnabled: false };
   isEditMode = false;
 
   constructor(

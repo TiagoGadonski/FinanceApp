@@ -4,7 +4,6 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Usuário</th>
             <th>Limite</th>
             <th>Data de Início</th>
             <th>Data de Término</th>
@@ -15,7 +14,6 @@
     <tbody>
         <tr *ngFor="let budget of budgets">
             <td>{{ budget.budgetId }}</td>
-            <td>{{ budget.userId }}</td> <!-- Isso poderia ser o nome do usuário se você carregar essa informação -->
             <td>{{ budget.limit }}</td>
             <td>{{ budget.startDate | date }}</td>
             <td>{{ budget.endDate | date }}</td>

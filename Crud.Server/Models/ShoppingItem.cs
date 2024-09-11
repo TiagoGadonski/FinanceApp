@@ -13,10 +13,7 @@ namespace Crud.Server.Models
         public string? Link { get; set; }
         public string? Image { get; set; }
         public string? Priority { get; set; }
-        public int UserId { get; set; }
-
         // Relacionamento
-        public virtual User? User { get; set; }
         public void MarkAsPurchased()
         {
             IsPurchased = true;

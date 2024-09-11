@@ -21,7 +21,6 @@ namespace Crud.Server.Controllers
         public async Task<ActionResult<IEnumerable<PaymentReminder>>> GetPaymentReminders()
         {
             return await _context.PaymentReminders
-                .Include(pr => pr.User)  // Incluir o relacionamento com o User
                 .ToListAsync();
         }
 
@@ -30,7 +29,6 @@ namespace Crud.Server.Controllers
         public async Task<ActionResult<PaymentReminder>> GetPaymentReminder(int id)
         {
             var paymentReminder = await _context.PaymentReminders
-                .Include(pr => pr.User)  // Incluir o relacionamento com o User
                 .FirstOrDefaultAsync(pr => pr.ReminderId == id);
 
             if (paymentReminder == null)

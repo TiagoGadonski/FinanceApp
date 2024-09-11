@@ -21,7 +21,6 @@ namespace Crud.Server.Controllers
         public async Task<ActionResult<IEnumerable<Transaction>>> GetTransactions()
         {
             return await _context.Transactions
-                .Include(t => t.User)       // Inclui o relacionamento com User
                 .Include(t => t.Category)   // Inclui o relacionamento com Category
                 .ToListAsync();
         }
@@ -31,7 +30,6 @@ namespace Crud.Server.Controllers
         public async Task<ActionResult<Transaction>> GetTransaction(int id)
         {
             var transaction = await _context.Transactions
-                .Include(t => t.User)       // Inclui o relacionamento com User
                 .Include(t => t.Category)   // Inclui o relacionamento com Category
                 .FirstOrDefaultAsync(t => t.TransactionId == id);
 
@@ -47,24 +45,24 @@ namespace Crud.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Transaction>> PostTransaction(Transaction transaction)
         {
-            // Verifica se a categoria e o usuário associados existem
-            var user = await _context.Users.FindAsync(transaction.UserId);
-            if (user == null)
-            {
-                return BadRequest("User not found.");
-            }
-
+            // Verificar se `CategoryId` é válido e carregar a entidade Category
             var category = await _context.Categories.FindAsync(transaction.CategoryId);
             if (category == null)
             {
                 return BadRequest("Category not found.");
             }
 
+            // Atribuir a categoria carregada à transação
+            transaction.Category = category;
+
+            // Adicionar e salvar a nova transação
             _context.Transactions.Add(transaction);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetTransaction), new { id = transaction.TransactionId }, transaction);
         }
+
+
 
         // PUT: api/transactions/5
         [HttpPut("{id}")]
@@ -73,13 +71,6 @@ namespace Crud.Server.Controllers
             if (id != transaction.TransactionId)
             {
                 return BadRequest();
-            }
-
-            // Verifica se a categoria e o usuário associados existem
-            var user = await _context.Users.FindAsync(transaction.UserId);
-            if (user == null)
-            {
-                return BadRequest("User not found.");
             }
 
             var category = await _context.Categories.FindAsync(transaction.CategoryId);
