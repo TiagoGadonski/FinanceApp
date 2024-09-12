@@ -123,5 +123,16 @@ namespace Crud.Server.Controllers
         {
             return _context.Transactions.Any(e => e.TransactionId == id);
         }
+
+        // GET: api/transactions/upcoming
+        [HttpGet("upcoming")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> GetUpcomingTransactions()
+        {
+            var upcomingTransactions = await _context.Transactions
+                .Where(t => t.Date >= DateTime.Now && t.Date <= DateTime.Now.AddDays(7))
+                .ToListAsync();
+
+            return Ok(upcomingTransactions);
+        }
     }
 }

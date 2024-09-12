@@ -10,6 +10,7 @@ import { TransactionListComponent } from './components/transaction-list/transact
 import { TransactionFormComponent } from './components/transaction-form/transaction-form.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
+import { HomeComponent } from './components/home/home.component';
 
 // Definindo as rotas
 const routes: Routes = [
@@ -31,6 +32,8 @@ const routes: Routes = [
   { path: 'tasks', component: TaskListComponent },
   { path: 'tasks/create', component: TaskFormComponent },
   { path: 'tasks/edit/:id', component: TaskFormComponent },
+  { path: '', component: HomeComponent },  // Define a rota inicial como HomeComponent
+  { path: '**', redirectTo: '' }
 ];
 
 

@@ -161,5 +161,15 @@ namespace Crud.Server.Controllers
         {
             return _context.TaskManagers.Any(e => e.TaskId == id);
         }
+
+        [HttpGet("upcoming")]
+        public async Task<ActionResult<IEnumerable<TaskManager>>> GetUpcomingTasks()
+        {
+            var upcomingTasks = await _context.TaskManagers
+                .Where(t => t.DueDate.HasValue && t.DueDate.Value >= DateTime.Now && t.DueDate.Value <= DateTime.Now.AddDays(7))
+                .ToListAsync();
+
+            return Ok(upcomingTasks);
+        }
     }
 }

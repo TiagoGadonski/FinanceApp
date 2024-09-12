@@ -31,4 +31,8 @@ export class TaskManagerService {
   deleteTask(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+  getUpcomingTasks(): Observable<TaskManager[]> {
+    return this.http.get<TaskManager[]>(`${this.apiUrl}/upcoming`);
+  }
 }

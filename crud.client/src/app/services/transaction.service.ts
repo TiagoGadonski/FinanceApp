@@ -31,4 +31,8 @@ export class TransactionService {
   deleteTransaction(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+  getUpcomingTransactions(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.apiUrl}/upcoming`);
+  }
 }

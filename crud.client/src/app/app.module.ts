@@ -18,6 +18,7 @@ import { TaskFormComponent } from './components/task-form/task-form.component'; 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ToastrModule } from 'ngx-toastr';
     TransactionListComponent,
     TransactionFormComponent,
     TaskListComponent,
-    TaskFormComponent
+    TaskFormComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
