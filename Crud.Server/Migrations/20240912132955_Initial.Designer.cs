@@ -11,14 +11,38 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Crud.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240911144348_initialCr")]
-    partial class initialCr
+    [Migration("20240912132955_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
+
+            modelBuilder.Entity("Crud.Server.Models.Attachment", b =>
+                {
+                    b.Property<int>("AttachmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("TaskManagerTaskId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AttachmentId");
+
+                    b.HasIndex("TaskManagerTaskId");
+
+                    b.ToTable("Attachments");
+                });
 
             modelBuilder.Entity("Crud.Server.Models.Budget", b =>
                 {
@@ -62,30 +86,6 @@ namespace Crud.Server.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Crud.Server.Models.PaymentReminder", b =>
-                {
-                    b.Property<int>("ReminderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsPaid")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ReminderId");
-
-                    b.ToTable("PaymentReminders");
-                });
-
             modelBuilder.Entity("Crud.Server.Models.ShoppingItem", b =>
                 {
                     b.Property<int>("ItemId")
@@ -118,6 +118,64 @@ namespace Crud.Server.Migrations
                     b.ToTable("ShoppingItems");
                 });
 
+            modelBuilder.Entity("Crud.Server.Models.SubTask", b =>
+                {
+                    b.Property<int>("SubTaskId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("TaskManagerTaskId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("SubTaskId");
+
+                    b.HasIndex("TaskManagerTaskId");
+
+                    b.ToTable("SubTasks");
+                });
+
+            modelBuilder.Entity("Crud.Server.Models.TaskManager", b =>
+                {
+                    b.Property<int>("TaskId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DueDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsReminderEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Tags")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("TaskId");
+
+                    b.ToTable("TaskManagers");
+                });
+
             modelBuilder.Entity("Crud.Server.Models.Transaction", b =>
                 {
                     b.Property<int>("TransactionId")
@@ -127,7 +185,7 @@ namespace Crud.Server.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Date")
@@ -167,13 +225,25 @@ namespace Crud.Server.Migrations
                     b.ToTable("Transactions");
                 });
 
+            modelBuilder.Entity("Crud.Server.Models.Attachment", b =>
+                {
+                    b.HasOne("Crud.Server.Models.TaskManager", null)
+                        .WithMany("Attachments")
+                        .HasForeignKey("TaskManagerTaskId");
+                });
+
+            modelBuilder.Entity("Crud.Server.Models.SubTask", b =>
+                {
+                    b.HasOne("Crud.Server.Models.TaskManager", null)
+                        .WithMany("SubTasks")
+                        .HasForeignKey("TaskManagerTaskId");
+                });
+
             modelBuilder.Entity("Crud.Server.Models.Transaction", b =>
                 {
                     b.HasOne("Crud.Server.Models.Category", "Category")
                         .WithMany("Transactions")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
                 });
@@ -181,6 +251,13 @@ namespace Crud.Server.Migrations
             modelBuilder.Entity("Crud.Server.Models.Category", b =>
                 {
                     b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("Crud.Server.Models.TaskManager", b =>
+                {
+                    b.Navigation("Attachments");
+
+                    b.Navigation("SubTasks");
                 });
 #pragma warning restore 612, 618
         }

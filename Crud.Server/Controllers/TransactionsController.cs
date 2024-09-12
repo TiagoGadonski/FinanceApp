@@ -20,9 +20,12 @@ namespace Crud.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetTransactions()
         {
-            return await _context.Transactions
-                .Include(t => t.Category)   // Inclui o relacionamento com Category
+            var transactions = await _context.Transactions
+                .Include(t => t.Category)
                 .ToListAsync();
+
+            // Retornar diretamente a lista de transações, sem incluir metadados como $id e $values
+            return Ok(transactions);
         }
 
         // GET: api/transactions/5

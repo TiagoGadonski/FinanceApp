@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Crud.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -42,22 +42,6 @@ namespace Crud.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PaymentReminders",
-                columns: table => new
-                {
-                    ReminderId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    DueDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Amount = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
-                    IsPaid = table.Column<bool>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PaymentReminders", x => x.ReminderId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ShoppingItems",
                 columns: table => new
                 {
@@ -77,6 +61,25 @@ namespace Crud.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TaskManagers",
+                columns: table => new
+                {
+                    TaskId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    DueDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Priority = table.Column<int>(type: "INTEGER", nullable: false),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsReminderEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Tags = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TaskManagers", x => x.TaskId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Transactions",
                 columns: table => new
                 {
@@ -85,7 +88,7 @@ namespace Crud.Server.Migrations
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Amount = table.Column<decimal>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CategoryId = table.Column<int>(type: "INTEGER", nullable: true),
                     TransactionType = table.Column<string>(type: "TEXT", nullable: true),
                     PaymentMethod = table.Column<string>(type: "TEXT", nullable: true),
                     ReceiptImage = table.Column<string>(type: "TEXT", nullable: true),
@@ -102,9 +105,58 @@ namespace Crud.Server.Migrations
                         name: "FK_Transactions_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CategoryId");
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Attachments",
+                columns: table => new
+                {
+                    AttachmentId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FilePath = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    TaskManagerTaskId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attachments", x => x.AttachmentId);
+                    table.ForeignKey(
+                        name: "FK_Attachments_TaskManagers_TaskManagerTaskId",
+                        column: x => x.TaskManagerTaskId,
+                        principalTable: "TaskManagers",
+                        principalColumn: "TaskId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SubTasks",
+                columns: table => new
+                {
+                    SubTaskId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    IsCompleted = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TaskManagerTaskId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubTasks", x => x.SubTaskId);
+                    table.ForeignKey(
+                        name: "FK_SubTasks_TaskManagers_TaskManagerTaskId",
+                        column: x => x.TaskManagerTaskId,
+                        principalTable: "TaskManagers",
+                        principalColumn: "TaskId");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Attachments_TaskManagerTaskId",
+                table: "Attachments",
+                column: "TaskManagerTaskId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubTasks_TaskManagerTaskId",
+                table: "SubTasks",
+                column: "TaskManagerTaskId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_CategoryId",
@@ -116,16 +168,22 @@ namespace Crud.Server.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Budgets");
+                name: "Attachments");
 
             migrationBuilder.DropTable(
-                name: "PaymentReminders");
+                name: "Budgets");
 
             migrationBuilder.DropTable(
                 name: "ShoppingItems");
 
             migrationBuilder.DropTable(
+                name: "SubTasks");
+
+            migrationBuilder.DropTable(
                 name: "Transactions");
+
+            migrationBuilder.DropTable(
+                name: "TaskManagers");
 
             migrationBuilder.DropTable(
                 name: "Categories");

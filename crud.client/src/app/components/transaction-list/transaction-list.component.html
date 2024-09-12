@@ -6,18 +6,16 @@
             <th>Data</th>
             <th>Valor</th>
             <th>Descrição</th>
-            <th>Tipo de Transação</th>
-            <th>Método de Pagamento</th>
+            <th>Categoria</th>
             <th>Ações</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let transaction of transactions">
             <td>{{ transaction.date | date }}</td>
-            <td>{{ transaction.amount | currency }}</td>
+            <td>{{ transaction.amount }}</td>
             <td>{{ transaction.description }}</td>
-            <td>{{ transaction.transactionType }}</td>
-            <td>{{ transaction.paymentMethod }}</td>
+            <td>{{ transaction.category?.name }}</td>
             <td>
                 <a [routerLink]="['/transactions/edit', transaction.transactionId]" class="btn btn-primary">Editar</a>
                 <button (click)="deleteTransaction(transaction.transactionId)" class="btn btn-danger">Excluir</button>
@@ -25,5 +23,8 @@
         </tr>
     </tbody>
 </table>
+
+
+
 
 <a routerLink="/transactions/create" class="btn btn-success">Adicionar Nova Transação</a>
