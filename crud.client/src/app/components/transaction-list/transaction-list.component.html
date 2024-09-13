@@ -1,30 +1,109 @@
-<h2>Lista de Transações</h2>
+<main class="content">
+    <div class="container-fluid p-0">
+        <div class="row mb-3 mt-3">
+            <h1 class="col align-self-start text-start">Transactions</h1>
+            <a routerLink="/transactions/create" class="btn btn-success col-lg-2 col align-self-end"><i class="fas fa-plus"></i> Transação</a>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-5">
+                    <input [(ngModel)]="descriptionFilter" placeholder="Filtrar por Descrição" class="form-control" (input)="applyFilters()" />
+                </div>
+                <div class="col-md-5">
+                    <input [(ngModel)]="transactionTypeFilter" placeholder="Filtrar por Tipo de Transação" class="form-control" (input)="applyFilters()" />
+                </div>
+                <select class="col-auto" (change)="filterByCategory($event)">
+                    <option value="">Todas as Categorias</option> <!-- Para remover o filtro de categorias -->
+                    <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.name }}</option>
+                </select>
+            </div>
+        </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Data</th>
-            <th>Valor</th>
-            <th>Descrição</th>
-            <th>Categoria</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let transaction of transactions">
-            <td>{{ transaction.date | date }}</td>
-            <td>{{ transaction.amount }}</td>
-            <td>{{ transaction.description }}</td>
-            <td>{{ transaction.category?.name }}</td>
-            <td>
-                <a [routerLink]="['/transactions/edit', transaction.transactionId]" class="btn btn-primary">Editar</a>
-                <button (click)="deleteTransaction(transaction.transactionId)" class="btn btn-danger">Excluir</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+        <h4>Total a Pagar por Mês: {{ installmentAmount | currency }}</h4>
 
 
+        <div class="row">
+            <div>
 
 
-<a routerLink="/transactions/create" class="btn btn-success">Adicionar Nova Transação</a>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width:40%;">Descrição</th>
+                            <th style="width:25%">Data</th>
+                            <th class="d-none d-md-table-cell" style="width:25%">Valor</th>
+                            <th>TransactionType</th>
+                            <th>PaymentMethod</th>
+
+                            <th>Parcelas</th>
+                            <th>InstallmentAmount</th>
+                            <th>EndDate</th>
+                            <th>ExpenseType</th>
+                            <th>Categoria</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let transaction of filteredTransactions">
+                            <td>{{ transaction?.description }}</td>
+                            <td>{{ transaction?.date | date }}</td>
+                            <td class="d-none d-md-table-cell">{{ transaction?.amount }}</td>
+                            <td>{{ transaction?.transactionType }}</td>
+                            <td>{{ transaction?.paymentMethod }}</td>
+
+                            <td>{{ transaction?.installmentsPaid }} / {{ transaction?.totalInstallments }}</td>
+                            <td>{{ transaction?.installmentAmount }}</td>
+                            <td>{{ transaction?.endDate | date }}</td>
+                            <td>{{ getExpenseTypeLabel(transaction?.expenseType) }}</td>
+                            <td>{{ transaction?.category?.name }}</td>
+                            <button class="btn btn-info" (click)="openTransactionModal(transaction)">View Details</button>
+                            <td class="table-action">
+                                <a [routerLink]="['/transactions/edit', transaction.transactionId]">
+
+                                    <i class="fa-regular fa-pen-to-square align-middle"></i>
+                                </a>
+                                <button (click)="deleteTransaction(transaction.transactionId)">
+
+                                    <i class="align-middle fa-regular fa-trash-can"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<!-- Modal Structure -->
+<div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="transactionModalLabel">Transaction Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Date:</strong> {{ selectedTransaction?.date | date }}</p>
+                <p><strong>Amount:</strong> {{ selectedTransaction?.amount | currency }}</p>
+                <p><strong>Description:</strong> {{ selectedTransaction?.description }}</p>
+                <p><strong>Transaction Type:</strong> {{ selectedTransaction?.transactionType }}</p>
+                <p><strong>Payment Method:</strong> {{ selectedTransaction?.paymentMethod }}</p>
+                <p><strong>Installments:</strong> {{ selectedTransaction?.installmentsPaid }} / {{ selectedTransaction?.totalInstallments }}</p>
+                <p><strong>Installment Amount:</strong> {{ selectedTransaction?.installmentAmount | currency }}</p>
+                <p><strong>End Date:</strong> {{ selectedTransaction?.endDate | date }}</p>
+                <p><strong>Expense Type:</strong> {{ selectedTransaction?.expenseType }}</p>
+                <p><strong>Category:</strong> {{ selectedTransaction?.category?.name }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

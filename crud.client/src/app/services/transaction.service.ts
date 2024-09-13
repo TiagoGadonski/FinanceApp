@@ -35,4 +35,8 @@ export class TransactionService {
   getUpcomingTransactions(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(`${this.apiUrl}/upcoming`);
   }
+
+  getTransactionsByCategory(categoryId: number): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.apiUrl}/category/${categoryId}`);
+  }
 }

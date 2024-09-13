@@ -31,6 +31,10 @@ export class TaskListComponent implements OnInit {
     });
   }
 
+  getTasksByStatus(status: string): TaskManager[] {
+    return this.tasks.filter(task => task.status === status);  // Filtra tarefas com base no status
+  }
+
   checkDueDates(): void {
     const today = new Date();
     this.tasks.forEach(task => {

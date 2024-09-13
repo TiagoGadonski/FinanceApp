@@ -5,8 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { BudgetListComponent } from './components/budget-list/budget-list.component';
-import { BudgetFormComponent } from './components/budget-form/budget-form.component';
 import { ShoppingItemListComponent } from './components/shopping-item-list/shopping-item-list.component';
 import { ShoppingItemFormComponent } from './components/shopping-item-form/shopping-item-form.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
@@ -23,8 +21,6 @@ import { HomeComponent } from './components/home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
-    BudgetListComponent,
-    BudgetFormComponent,
     ShoppingItemListComponent,
     ShoppingItemFormComponent,
     CategoryListComponent,

@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BudgetListComponent } from './components/budget-list/budget-list.component';
-import { BudgetFormComponent } from './components/budget-form/budget-form.component';
 import { ShoppingItemFormComponent } from './components/shopping-item-form/shopping-item-form.component';
 import { ShoppingItemListComponent } from './components/shopping-item-list/shopping-item-list.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
@@ -14,12 +12,6 @@ import { HomeComponent } from './components/home/home.component';
 
 // Definindo as rotas
 const routes: Routes = [
-  { path: 'budgets', component: BudgetListComponent },  // Lista de budgets
-  { path: 'budgets/create', component: BudgetFormComponent },  // Criar novo budget
-  { path: 'budgets/edit/:id', component: BudgetFormComponent },  // Editar budget
-  // { path: '', redirectTo: '/users', pathMatch: 'full' },  // Comente temporariamente o redirecionamento
-  // { path: '**', redirectTo: '/users' }  // Comente temporariamente o redirecionamento
-
   { path: 'shoppingitems', component: ShoppingItemListComponent },
   { path: 'shoppingitems/create', component: ShoppingItemFormComponent },
   { path: 'shoppingitems/edit/:id', component: ShoppingItemFormComponent },

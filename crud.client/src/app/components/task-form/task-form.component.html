@@ -29,10 +29,10 @@
     <div class="form-group">
         <label for="status">Status</label>
         <select id="status" [(ngModel)]="task.status" name="status" class="form-control">
-            <option [value]="0">Pendente</option>
-            <option [value]="1">Em Andamento</option>
-            <option [value]="2">Concluída</option>
-            <option [value]="3">Cancelada</option>
+            <option [value]="TaskStatus.Pending">Pendente</option>
+            <option [value]="TaskStatus.InProgress">Em Andamento</option>
+            <option [value]="TaskStatus.Completed">Concluída</option>
+            <option [value]="TaskStatus.Canceled">Cancelada</option>
         </select>
     </div>
 

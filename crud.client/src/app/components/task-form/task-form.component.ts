@@ -24,6 +24,7 @@ export class TaskFormComponent implements OnInit {
   };
 
   isEditMode = false;
+  TaskStatus = TaskStatus;
 
   constructor(
     private taskService: TaskManagerService,

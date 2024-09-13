@@ -1,17 +1,32 @@
-<div class="container">
+<main class="container">
   <h1>Bem-vindo à sua Dashboard</h1>
 
-  <h2>Próximas Contas a Pagar</h2>
-  <ul>
-    <li *ngFor="let transaction of upcomingTransactions">
-      {{ transaction.description }} - Valor: {{ transaction.amount }} - Vencimento: {{ transaction.date | date:'shortDate' }}
-    </li>
-  </ul>
+  <div class="row mb-3 mt-3">
+      <h2 class="col align-self-start text-start">Próximas Contas a Pagar</h2>
+      <a routerLink="/transactions/create" class="btn btn-success col-lg-2 col align-self-end"><i class="fas fa-plus"></i> Transação</a>
 
-  <h2>Próximas Tarefas</h2>
-  <ul>
-    <li *ngFor="let task of upcomingTasks">
-      {{ task.title }} - Prazo: {{ task.dueDate | date:'shortDate' }}
-    </li>
-  </ul>
+  </div>
+  <div *ngFor="let transaction of upcomingTransactions" class="card" style="width: 18rem;">
+    <img src="assets/paybills.webp" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title"> {{ transaction.description }} </h5>
+        <p class="card-text">Valor: {{ transaction.amount }} - Vencimento: {{ transaction.date | date:'shortDate' }}</p>
+        <a href="#" class="btn btn-primary">Pagar</a>
+    </div>
+   </div>
+
+   <div class="row mb-3 mt-3">
+      <h2 class="col align-self-start text-start">Próximas Tarefas</h2>
+      <a routerLink="/tasks/create" class="btn btn-primary col-lg-2 col align-self-end"><i class="fas fa-plus"></i> Task</a>
+
+   </div>
+  <div *ngFor="let task of upcomingTasks" class="card" style="width: 18rem; ">
+  <img src="assets/nexttasks.webp" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"> {{ task.title }}</h5>
+    <p class="card-text">Prazo: {{ task.dueDate | date:'shortDate' }}</p>
+    <a href="#" class="btn btn-primary">Fazer</a>
+  </div>
 </div>
+
+</main>

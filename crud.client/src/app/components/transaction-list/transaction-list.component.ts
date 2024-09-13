@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import $ from 'jquery';
+import jQuery from 'jquery';
 import { TransactionService } from '../../services/transaction.service';
 import { Transaction } from '../../models/transaction';
 import { ToastService } from '../../services/toast.service';
+import { CategoryService } from '../../services/category.service';  // Adicionei o serviço de categorias
+import { Category } from '../../models/category';
+import { ExpenseType } from '../../models/ExpenseType';
 
 @Component({
   selector: 'app-transaction-list',
@@ -11,37 +16,90 @@ import { ToastService } from '../../services/toast.service';
 export class TransactionListComponent implements OnInit {
 
   transactions: Transaction[] = [];
+  filteredTransactions: Transaction[] = [];
+  descriptionFilter: string = '';
+  transactionTypeFilter: string = '';
+  selectedCategoryId: number | null = null;
+  installmentAmount: number = 0;
+  categories: Category[] = [];
+  selectedTransaction: Transaction | null = null;
 
-  constructor(private transactionService: TransactionService, private toastService: ToastService) { }
+  constructor(
+    private transactionService: TransactionService,
+    private categoryService: CategoryService,  // Adicionei o serviço de categorias
+    private toastService: ToastService
+  ) { }
 
   ngOnInit(): void {
     this.getTransactions();
+    this.getCategories();  // Chama o método para carregar as categorias
+  }
+
+  getExpenseTypeLabel(expenseType?: number): string {
+    if (expenseType === undefined || expenseType === null) {
+      return 'Unknown'; // Default label when `expenseType` is undefined or null
+    }
+    return ExpenseType[expenseType]; // This will map number to enum string
   }
 
   getTransactions(): void {
     this.transactionService.getTransactions().subscribe(
       (response: any) => {
-        if (response.$values) {
-          this.transactions = response.$values; // Acessa o array dentro de $values
-        } else {
-          this.transactions = response; // Caso não tenha $values, atribui diretamente
-        }
-        console.log('Transações recebidas:', this.transactions);
+        this.transactions = response.$values || response; // Acessa o array dentro de $values se existir
+        this.filteredTransactions = [...this.transactions]; // Inicializa com todas as transações
+        this.calculateTotalMonthlyPayment();
+        this.checkDueDates();
       },
       error => {
         console.error('Erro ao carregar transações:', error);
       }
     );
-    this.checkDueDates();
   }
-  
 
+  openTransactionModal(transaction: Transaction): void {
+    this.selectedTransaction = transaction;
+    // Open the modal (using Bootstrap's JS)
+    $('#transactionModal').modal('show');
+  }
+
+  getCategories(): void {
+    this.categoryService.getCategories().subscribe(
+      (categories) => {
+        this.categories = categories;
+      },
+      error => {
+        console.error('Erro ao carregar categorias:', error);
+      }
+    );
+  }
+
+  applyFilters(): void {
+    this.filteredTransactions = this.transactions.filter(transaction =>
+      (this.descriptionFilter ? transaction.description.toLowerCase().includes(this.descriptionFilter.toLowerCase()) : true) &&
+      (this.transactionTypeFilter ? transaction.transactionType.toLowerCase().includes(this.transactionTypeFilter.toLowerCase()) : true) &&
+      (this.selectedCategoryId ? transaction.category?.categoryId === this.selectedCategoryId : true)
+    );
+    this.calculateTotalMonthlyPayment();
+  }
+
+  filterByCategory(event: Event): void {
+    const categoryId = (event.target as HTMLSelectElement).value;
+    this.selectedCategoryId = categoryId ? +categoryId : null;
+    this.applyFilters();
+  }
+
+  calculateTotalMonthlyPayment(): void {
+    this.installmentAmount = this.filteredTransactions.reduce((total, transaction) => {
+      return total + (transaction.installmentAmount || 0);
+    }, 0);
+  }
 
   deleteTransaction(id: number): void {
     this.transactionService.deleteTransaction(id).subscribe(() => {
       this.getTransactions();  // Recarregar a lista após a exclusão
     });
   }
+
   checkDueDates(): void {
     const today = new Date();
     this.transactions.forEach(transaction => {

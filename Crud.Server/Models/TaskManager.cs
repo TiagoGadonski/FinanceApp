@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Crud.Server.Models
 {
@@ -81,6 +82,7 @@ namespace Crud.Server.Models
     }
 
     // Enum para status de tarefas
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum TaskStatus
     {
         Pending,

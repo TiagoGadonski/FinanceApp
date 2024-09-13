@@ -12,7 +12,6 @@ namespace Crud.Server.Data
         public DbSet<ShoppingItem> ShoppingItems { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<Budget> Budgets { get; set; }
         public DbSet<TaskManager> TaskManagers { get; set; }
         public DbSet<SubTask> SubTasks { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
