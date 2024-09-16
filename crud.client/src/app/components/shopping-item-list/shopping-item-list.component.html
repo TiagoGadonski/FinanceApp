@@ -1,30 +1,44 @@
 <main class="content">
-    <div class="container-fluid p-0">
+  <div class="container-fluid p-0">
 
-        <h1 class="h3 mb-3">Lista de Itens de Compras</h1>
+    <h1 class="h3 mb-3">Lista de Itens de Compras</h1>
 
-        <div class="row">
-            
-            <div *ngFor="let item of shoppingItems" class="col-12 col-md-6 col-lg-4">
-                <div class="card">
-                    <img class="card-img-top" [src]="item.image" [alt]="item.name">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">{{ item.name }}</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">{{ item.quantity }}</p>
-                        <p class="card-text">{{ item.price | currency }}</p>
-                        <p class="card-text">{{ item.isPurchased ? 'Sim' : 'Não' }}</p>
-                        <p class="card-text">{{ item.priority }}</p>
-                        <a [href]="item.link" target="_blank" class="btn btn-primary">Ver Mais</a>
-                        <a [routerLink]="['/shoppingitems/edit', item.itemId]" class="btn btn-primary">Editar</a>
-                        <button (click)="deleteShoppingItem(item.itemId)" class="btn btn-danger">Excluir</button>
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+
+      <div *ngFor="let item of shoppingItems" class="col-12 col-md-6 col-lg-4">
+        <div class="card shadow">
+          <img class="card-img-top" [src]="item.image" [alt]="item.name">
+          <div class="card-header">
+            <h5 class="card-title mb-0">{{ item.name }}</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{ item.quantity }}</p>
+            <p class="card-text">{{ item.price | currency }}</p>
+            <p class="card-text">{{ item.isPurchased ? 'Sim' : 'Não' }}</p>
+            <p class="card-text">{{ item.priority }}</p>
+            <a [href]="item.link" target="_blank" class="btn btn-primary">Ver Mais</a>
+            <a [routerLink]="['/shoppingitems/edit', item.itemId]" class="btn btn-primary">Editar</a>
+            <button (click)="deleteShoppingItem(item.itemId)" class="btn btn-danger">Excluir</button>
+          </div>
         </div>
-
+      </div>
     </div>
+
+  </div>
+  <a routerLink="/shoppingitems/create" class="btn btn-success">Adicionar Novo Item</a>
+
+  <div class="card text-center shadow">
+    <div class="card-header">
+      Featured
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+    <div class="card-footer text-body-secondary">
+      2 days ago
+    </div>
+  </div>
 </main>
 
-<a routerLink="/shoppingitems/create" class="btn btn-success">Adicionar Novo Item</a>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import $ from 'jquery';
-import jQuery from 'jquery';
+import { Modal } from 'bootstrap';
 import { TransactionService } from '../../services/transaction.service';
 import { Transaction } from '../../models/transaction';
 import { ToastService } from '../../services/toast.service';
@@ -58,8 +57,13 @@ export class TransactionListComponent implements OnInit {
 
   openTransactionModal(transaction: Transaction): void {
     this.selectedTransaction = transaction;
-    // Open the modal (using Bootstrap's JS)
-    $('#transactionModal').modal('show');
+
+    // Get the modal element
+    const modalElement = document.getElementById('transactionModal');
+
+    // Initialize the Bootstrap modal
+    const modal = new Modal(modalElement!);  // Using '!' to ensure the element is non-null
+    modal.show();  // Show the modal
   }
 
   getCategories(): void {
