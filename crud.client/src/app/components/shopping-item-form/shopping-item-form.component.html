@@ -1,42 +1,50 @@
-<h2 *ngIf="isEditMode">Editar Item de Compras</h2>
-<h2 *ngIf="!isEditMode">Adicionar Novo Item de Compras</h2>
+<main class="container">
+    <div class="shadow p-4 mb-4 mt-4 bg-body-tertiary rounded">
 
-<form (ngSubmit)="saveShoppingItem()">
-    <div class="form-group">
-        <label for="name">Nome</label>
-        <input id="name" [(ngModel)]="shoppingItem.name" name="name" class="form-control" required />
+        <h2 *ngIf="isEditMode">Editar Item de Compras</h2>
+        <h2 *ngIf="!isEditMode">Adicionar Novo Item de Compras</h2>
+
+        <form (ngSubmit)="saveShoppingItem()" class="row g-3">
+            <div class="form-floating mb-3">
+                <input id="name" [(ngModel)]="shoppingItem.name" name="name" class="form-control" placeholder="Nome" required />
+                <label for="name">Nome</label>
+            </div>
+
+            <div class="form-floating mb-3 col-md-6">
+                <input id="quantity" [(ngModel)]="shoppingItem.quantity" name="quantity" type="number" class="form-control" placeholder="Quantidade" required />
+                <label for="quantity">Quantidade</label>
+            </div>
+
+            <div class="form-floating mb-3 col-md-4">
+                <input id="price" [(ngModel)]="shoppingItem.price" name="price" type="number" class="form-control" placeholder="Preço" required />
+                <label for="price">Preço</label>
+            </div>
+
+            <div class="form-group mb-3 col-md-2">
+                <label for="isPurchased">Comprado</label>
+                <input id="isPurchased" [(ngModel)]="shoppingItem.isPurchased" name="isPurchased" type="checkbox" />
+            </div>
+
+            <div class="form-floating mb-3">
+                <input id="priority" [(ngModel)]="shoppingItem.priority" name="priority" class="form-control" placeholder="Prioridade" />
+                <label for="priority">Prioridade</label>
+            </div>
+
+            <div class="form-floating mb-3 col-md-6">
+                <input id="link" [(ngModel)]="shoppingItem.link" name="link" class="form-control" placeholder="Link do Item se houver" />
+                <label for="link">Link</label>
+            </div>
+
+            <div class="form-floating mb-3 col-md-6">
+                <input id="image" [(ngModel)]="shoppingItem.image" name="image" class="form-control" placeholder="Imagem do item" />
+                <label for="image">Imagem</label>
+            </div>
+            <div class="row gap-3 justify-content-center">
+
+                <button type="submit" class="btn btn-success col-4">Salvar</button>
+                <a routerLink="/shoppingitems" class="btn btn-secondary col-4">Cancelar</a>
+            </div>
+        </form>
     </div>
+</main>
 
-    <div class="form-group">
-        <label for="quantity">Quantidade</label>
-        <input id="quantity" [(ngModel)]="shoppingItem.quantity" name="quantity" type="number" class="form-control" required />
-    </div>
-
-    <div class="form-group">
-        <label for="price">Preço</label>
-        <input id="price" [(ngModel)]="shoppingItem.price" name="price" type="number" class="form-control" required />
-    </div>
-
-    <div class="form-group">
-        <label for="isPurchased">Comprado</label>
-        <input id="isPurchased" [(ngModel)]="shoppingItem.isPurchased" name="isPurchased" type="checkbox" />
-    </div>
-
-    <div class="form-group">
-        <label for="priority">Prioridade</label>
-        <input id="priority" [(ngModel)]="shoppingItem.priority" name="priority" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label for="link">Link</label>
-        <input id="link" [(ngModel)]="shoppingItem.link" name="link" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label for="image">Imagem</label>
-        <input id="image" [(ngModel)]="shoppingItem.image" name="image" class="form-control" />
-    </div>
-
-    <button type="submit" class="btn btn-success">Salvar</button>
-    <a routerLink="/shoppingitems" class="btn btn-secondary">Cancelar</a>
-</form>

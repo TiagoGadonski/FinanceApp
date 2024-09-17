@@ -32,48 +32,87 @@
     <h4>Total a Pagar por Mês: {{ installmentAmount | currency }}</h4>
 
     <div class="row">
-      <div>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th style="width:40%;">Descrição</th>
-              <th style="width:25%">Data</th>
-              <th class="d-none d-md-table-cell" style="width:25%">Valor</th>
-              <th>TransactionType</th>
-              <th>PaymentMethod</th>
-              <th>Parcelas</th>
-              <th>InstallmentAmount</th>
-              <th>EndDate</th>
-              <th>ExpenseType</th>
-              <th>Categoria</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let transaction of filteredTransactions">
-              <td>{{ transaction?.description }}</td>
-              <td>{{ transaction?.date | date }}</td>
-              <td class="d-none d-md-table-cell">{{ transaction?.amount }}</td>
-              <td>{{ transaction?.transactionType }}</td>
-              <td>{{ transaction?.paymentMethod }}</td>
-              <td>{{ transaction?.installmentsPaid }} / {{ transaction?.totalInstallments }}</td>
-              <td>{{ transaction?.installmentAmount }}</td>
-              <td>{{ transaction?.endDate | date }}</td>
-              <td>{{ getExpenseTypeLabel(transaction?.expenseType) }}</td>
-              <td>{{ transaction?.category?.name }}</td>
-              <td class="table-action">
-                <button class="btn btn-info" (click)="openTransactionModal(transaction)">View Details</button>
-                <a [routerLink]="['/transactions/edit', transaction.transactionId]">
-                  <i class="fa-regular fa-pen-to-square align-middle"></i>
-                </a>
-                <button (click)="deleteTransaction(transaction.transactionId)">
-                  <i class="align-middle fa-regular fa-trash-can"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width:40%;">Descrição</th>
+                        <th style="width:25%">Data</th>
+                        <th class="d-none d-md-table-cell" style="width:25%">Valor</th>
+                        <th>TransactionType</th>
+                        <th>PaymentMethod</th>
+                        <th>Parcelas</th>
+                        <th>InstallmentAmount</th>
+                        <th>EndDate</th>
+                        <th>ExpenseType</th>
+                        <th>Categoria</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let transaction of filteredTransactions">
+                        <td>{{ transaction?.description }}</td>
+                        <td>{{ transaction?.date | date }}</td>
+                        <td class="d-none d-md-table-cell">{{ transaction?.amount }}</td>
+                        <td>{{ transaction?.transactionType }}</td>
+                        <td>{{ transaction?.paymentMethod }}</td>
+                        <td>{{ transaction?.installmentsPaid }} / {{ transaction?.totalInstallments }}</td>
+                        <td>{{ transaction?.installmentAmount }}</td>
+                        <td>{{ transaction?.endDate | date }}</td>
+                        <td>{{ getExpenseTypeLabel(transaction?.expenseType) }}</td>
+                        <td>{{ transaction?.category?.name }}</td>
+                        <td class="table-action">
+                            <button class="btn btn-info" (click)="openTransactionModal(transaction)">View Details</button>
+                            <a [routerLink]="['/transactions/edit', transaction.transactionId]">
+                                <i class="fa-regular fa-pen-to-square align-middle"></i>
+                            </a>
+                            <button (click)="deleteTransaction(transaction.transactionId)">
+                                <i class="align-middle fa-regular fa-trash-can"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Nova tabela -->
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Data</th>
+                        <th>Valor Total</th>
+                        <th>Valor Parcela</th>
+                        <th>Parcelas</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let transaction of filteredTransactions">
+                        <td>{{ transaction.description }}</td>
+                        <td>{{ transaction.date | date }}</td>
+                        <td>{{ transaction.amount | currency }}</td>
+                        <td>{{ transaction.installmentAmount | currency }}</td>
+                        <td>{{ transaction.installmentsPaid }} / {{ transaction.totalInstallments }}</td>
+                        <td class="table-action">
+                            <button [disabled]="transaction.paidThisMonth || transaction.installmentsPaid >= transaction.totalInstallments"
+                                    (click)="payInstallment(transaction)"
+                                    class="btn btn-success">
+                                Pagar
+                            </button>
+                            <button class="btn btn-info" (click)="openTransactionModal(transaction)">View Details</button>
+                            <a [routerLink]="['/transactions/edit', transaction.transactionId]">
+                                <i class="fa-regular fa-pen-to-square align-middle"></i>
+                            </a>
+                            <button (click)="deleteTransaction(transaction.transactionId)">
+                                <i class="align-middle fa-regular fa-trash-can"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
     </div>
   </div>
 </main>

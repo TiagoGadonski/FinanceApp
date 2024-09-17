@@ -48,11 +48,38 @@ export class TransactionListComponent implements OnInit {
         this.filteredTransactions = [...this.transactions]; // Inicializa com todas as transações
         this.calculateTotalMonthlyPayment();
         this.checkDueDates();
+        this.resetPaymentStatus();
       },
       error => {
         console.error('Erro ao carregar transações:', error);
       }
     );
+  }
+
+  payInstallment(transaction: Transaction): void {
+    if (transaction.installmentsPaid < transaction.totalInstallments) {
+      transaction.installmentsPaid += 1;
+      transaction.paidThisMonth = true;  // Marca como pago no mês atual
+
+      // Atualiza a transação no backend
+      this.transactionService.updateTransaction(transaction.transactionId, transaction).subscribe(() => {
+        this.toastService.showSuccess(`Parcela paga com sucesso!`, 'Pagamento');
+      });
+    }
+  }
+  resetPaymentStatus(): void {
+    const today = new Date();
+    const currentMonth = today.getMonth();
+
+    this.transactions.forEach(transaction => {
+      const lastPaymentDate = new Date(transaction.lastPaymentDate || '1970-01-01');
+      const lastPaymentMonth = lastPaymentDate.getMonth();
+
+      // Se o mês atual for diferente do mês do último pagamento, habilita o botão novamente
+      if (currentMonth !== lastPaymentMonth) {
+        transaction.paidThisMonth = false;
+      }
+    });
   }
 
   openTransactionModal(transaction: Transaction): void {

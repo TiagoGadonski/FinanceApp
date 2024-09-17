@@ -17,4 +17,6 @@ export interface Transaction {
     name: string;
     description: string;
   };
+  paidThisMonth?: boolean;
+  lastPaymentDate?: Date;
 }

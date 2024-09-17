@@ -27,18 +27,21 @@
   </div>
   <a routerLink="/shoppingitems/create" class="btn btn-success">Adicionar Novo Item</a>
 
-  <div class="card text-center shadow">
-    <div class="card-header">
-      Featured
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-    <div class="card-footer text-body-secondary">
-      2 days ago
-    </div>
+  <div *ngFor="let item of shoppingItems" class="card text-center shadow">
+      <div class="card-header">
+          {{ item.name }}
+      </div>
+      <div class="card-body">
+          <h5 class="card-title">{{ item.priority }}</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+          <a [href]="item.link" target="_blank" class="btn btn-primary">Ver Mais</a>
+          <a [routerLink]="['/shoppingitems/edit', item.itemId]" class="btn btn-primary">Editar</a>
+          <button (click)="deleteShoppingItem(item.itemId)" class="btn btn-danger">Excluir</button>
+      </div>
+      <div class="card-footer text-body-secondary">
+          {{ item.price | currency }}
+      </div>
   </div>
 </main>
 
