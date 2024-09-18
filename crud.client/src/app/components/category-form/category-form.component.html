@@ -1,18 +1,24 @@
-<h2 *ngIf="isEditMode">Editar Categoria</h2>
-<h2 *ngIf="!isEditMode">Adicionar Nova Categoria</h2>
+<main class="container">
+    <div class="shadow p-4 mb-4 mt-4 bg-body-tertiary rounded">
+        <h2 *ngIf="isEditMode">Editar Categoria</h2>
+        <h2 *ngIf="!isEditMode">Adicionar Nova Categoria</h2>
 
-<form (ngSubmit)="saveCategory()">
-    <div class="form-floating mb-3">
-        <input id="name" [(ngModel)]="category.name" name="name" class="form-control" placeholder="Nome" required />
-        <label for="name">Nome</label>
+        <form (ngSubmit)="saveCategory()" class="row g-3 m-1 d-flex justify-content-between">
+            <div class="form-floating mb-3 col-md-5">
+                <input id="name" [(ngModel)]="category.name" name="name" class="form-control" placeholder="Nome" required />
+                <label class="" for="name">Nome</label>
+            </div>
+
+
+            <div class="form-floating mb-3 col-md-5">
+                <input id="description" [(ngModel)]="category.description" name="description" class="form-control " placeholder="Descrição" required />
+                <label class="" for="description">Descrição</label>
+            </div>
+
+            <button type="submit" class="btn btn-success col-auto">Salvar</button>
+            <a routerLink="/categories" class="btn btn-secondary col-auto">Cancelar</a>
+        </form>
+
     </div>
 
-
-    <div class="form-floating mb-3">
-        <input id="description" [(ngModel)]="category.description" name="description" class="form-control" placeholder="Descrição" required />
-        <label for="description">Descrição</label>
-    </div>
-
-    <button type="submit" class="btn btn-success">Salvar</button>
-    <a routerLink="/categories" class="btn btn-secondary">Cancelar</a>
-</form>
+</main>

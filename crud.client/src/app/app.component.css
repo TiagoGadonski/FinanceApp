@@ -12,3 +12,40 @@ th, td {
 table {
     margin: 0 auto;
 }
+
+.custom-navbar {
+  width: 50%; /* Navbar com 50% da tela */
+  left: 25%; /* Centraliza a navbar na tela */
+}
+
+.nav-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background-color: #e6e4e4ad;
+  border-radius: 50%;
+  font-size: 16px; /* Ajusta o tamanho dos ícones */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+}
+
+  .nav-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+.navbar .nav-icon i {
+  font-size: 16px;
+  color: #000;
+}
+
+.nav-icon .fa {
+  margin: 0; /* Remove espaçamento interno dos ícones */
+}
+
+/* Espaçamento fixo entre os ícones */
+.container-fluid {
+  gap: 20px; /* Ajusta o espaço entre os ícones */
+}

@@ -1,5 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body">
-    <a class="navbar-brand text-white" routerLink="/">CRUD App</a>
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body text-uppercase fw-bold fs-6 px-4">
+    <a class="navbar-brand text-white" routerLink="/"><img src="assets/logo white.png" class="card-img-top" alt="..." style="height: 60px;"></a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,25 +28,80 @@
 <div class="container" data-bs-theme="dark">
     <router-outlet></router-outlet>
 
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-body">
-            Hello, world! This is a toast message.
-            <div class="mt-2 pt-2 border-top">
-                <button type="button" class="btn btn-primary btn-sm">Take action</button>
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
+    <!-- Toast container to position the toast -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <!-- First Toast to show every 5 seconds -->
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+            <div class="toast-body">
+                Hello, world! This is a toast message.
+                <div class="mt-2 pt-2 border-top">
+                    <button type="button" class="btn btn-primary btn-sm">Take action</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-  const toastTrigger = document.getElementById('liveToastBtn')
-  const toastLiveExample = document.getElementById('liveToast')
+<!-- Additional Toasts -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+        <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="...">
+            <strong class="me-auto">Bootstrap</strong>
+            <small class="text-body-secondary">just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            See? Just like this.
+        </div>
+    </div>
 
-  if (toastTrigger) {
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-    toastTrigger.addEventListener('click', () => {
-      toastBootstrap.show()
-    })
-  }
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+        <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="...">
+            <strong class="me-auto">Bootstrap</strong>
+            <small class="text-body-secondary">2 seconds ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Heads up, toasts will stack automatically
+        </div>
+    </div>
+</div>
+
+
+
+<!--          MENU NO FOOTER           -->
+
+<nav class="navbar fixed-bottom bg-body-tertiary custom-navbar rounded-pill mb-3">
+    <div class="container-fluid d-flex justify-content-center gap-4 rounded shadow-lg">
+        <a class="nav-icon hover-effect" data-bs-toggle="tooltip" data-bs-title="Home" routerLink="/"><i class="fa-solid fa-house-chimney"></i></a>
+        <a class="nav-icon hover-effect" data-bs-toggle="tooltip" data-bs-title="Categories" routerLink="/categories"><i class="fa-solid fa-layer-group"></i></a>
+        <a class="nav-icon hover-effect" data-bs-toggle="tooltip" data-bs-title="Transactions" routerLink="/transactions"><i class="fa-solid fa-cash-register"></i></a>
+        <a class="nav-icon hover-effect" data-bs-toggle="tooltip" data-bs-title="Shopping Items" routerLink="/shoppingitems"><i class="fa-solid fa-basket-shopping"></i></a>
+        <a class="nav-icon hover-effect" data-bs-toggle="tooltip" data-bs-title="Tasks" routerLink="/tasks"><i class="fa-solid fa-list-check"></i></a>
+    </div>
+</nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toastLiveExample = document.getElementById('liveToast');
+
+        if (toastLiveExample) {
+            const toastBootstrap = new bootstrap.Toast(toastLiveExample, { autohide: false });
+
+            // Exibir o toast a cada 5 segundos (5000ms)
+            setInterval(() => {
+                toastBootstrap.show();
+            }, 5000);
+        }
+
+        // Inicializando tooltips (se necessário)
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    });
+
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 </script>
