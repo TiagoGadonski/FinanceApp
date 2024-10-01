@@ -1,0 +1,28 @@
+/* note.component.css */
+.container {
+  padding: 20px;
+}
+
+.note-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+  .note-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+  }
+
+    .note-list li:hover {
+      background-color: #f9f9f9;
+    }
+
+.note-details {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+}

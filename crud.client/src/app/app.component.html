@@ -5,9 +5,9 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ">
+        <ul class="nav nav-tabs nav-fill">
             <li class="nav-item">
-                <a class="nav-link text-white" routerLink="/">Home</a>
+                <a class="nav-link text-white active" routerLink="/">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" routerLink="/categories">Categories</a>
@@ -20,6 +20,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" routerLink="/tasks">Tasks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" routerLink="/notes">Notes</a>
             </li>
         </ul>
     </div>
@@ -72,15 +75,35 @@
 
 
 
-<!--          MENU NO FOOTER           -->
+<!--          SIDEBAR           -->
 
-<nav class="navbar fixed-bottom bg-body-tertiary custom-navbar rounded-pill mb-3">
-    <div class="container-fluid d-flex justify-content-center gap-4 rounded shadow-lg">
-        <a class="nav-icon hover-effect" data-bs-toggle="tooltip" data-bs-title="Home" routerLink="/"><i class="fa-solid fa-house-chimney"></i></a>
-        <a class="nav-icon hover-effect" data-bs-toggle="tooltip" data-bs-title="Categories" routerLink="/categories"><i class="fa-solid fa-layer-group"></i></a>
-        <a class="nav-icon hover-effect" data-bs-toggle="tooltip" data-bs-title="Transactions" routerLink="/transactions"><i class="fa-solid fa-cash-register"></i></a>
-        <a class="nav-icon hover-effect" data-bs-toggle="tooltip" data-bs-title="Shopping Items" routerLink="/shoppingitems"><i class="fa-solid fa-basket-shopping"></i></a>
-        <a class="nav-icon hover-effect" data-bs-toggle="tooltip" data-bs-title="Tasks" routerLink="/tasks"><i class="fa-solid fa-list-check"></i></a>
+<button class="btn position-absolute bottom-0 start-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+    <img src="assets/logo white.png" class="card-img-top" alt="..." style="height: 60px;">
+</button>
+
+<nav class="navbar offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas-header d-flex justify-content-between">
+        <h5 class="offcanvas-title" id="offcanvasScrollingLabel"><a class="navbar-brand text-white" routerLink="/"><img src="assets/logo white.png" class="card-img-top" alt="..." style="height: 60px;"></a></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body justify-content-end">
+        <ul class="navbar-nav grid gap-3 flex-grow-1 pe-3">
+            <li class="nav-item">
+                <a class="nav-link d-flex hover-effect active" data-bs-toggle="tooltip" data-bs-title="Home" routerLink="/"><i class="fa-solid nav-icon me-3 fa-house-chimney"></i>Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex hover-effect" data-bs-toggle="tooltip" data-bs-title="Categories" routerLink="/categories"><i class="fa-solid nav-icon me-3 fa-layer-group"></i>Categories</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex hover-effect" data-bs-toggle="tooltip" data-bs-title="Transactions" routerLink="/transactions"><i class="fa-solid nav-icon me-3 fa-cash-register"></i> Transactions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex hover-effect" data-bs-toggle="tooltip" data-bs-title="Shopping Items" routerLink="/shoppingitems"><i class="fa-solid nav-icon me-3 fa-basket-shopping"></i>ShoppingItems</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex hover-effect" data-bs-toggle="tooltip" data-bs-title="Tasks" routerLink="/tasks"><i class="fa-solid nav-icon me-3 fa-list-check"></i>Tasks</a>
+            </li>
+        </ul>
     </div>
 </nav>
 

@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,8 @@ import { TaskFormComponent } from './components/task-form/task-form.component'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './components/home/home.component';
+import { NoteListComponent } from './components/note-list/note-list.component';
+import { NoteFormComponent } from './components/note-form/note-form.component';
 
 @NgModule({
   declarations: [
@@ -29,13 +32,16 @@ import { HomeComponent } from './components/home/home.component';
     TransactionFormComponent,
     TaskListComponent,
     TaskFormComponent,
-    HomeComponent
+    HomeComponent,
+    NoteListComponent,
+    NoteFormComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
     AppRoutingModule, FormsModule,
     BrowserAnimationsModule, // Necessário para animações
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

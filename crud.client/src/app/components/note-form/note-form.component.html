@@ -1,0 +1,23 @@
+<main class="container">
+    <div class="add-note-form">
+        <form [formGroup]="noteForm" (ngSubmit)="onSubmit()" class="row g-3">
+            <div class="form-group">
+                <label for="title">Título:</label>
+                <input class="form-control" id="title" formControlName="title" />
+            </div>
+
+            <div class="form-group">
+                <label for="content">Conteúdo:</label>
+                <textarea id="content" class="form-control" formControlName="content"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="tags">Tags (separadas por vírgula):</label>
+                <input class="form-control" id="tags" formControlName="tags" />
+            </div>
+
+            <button type="submit">{{ noteToEdit ? 'Salvar Alterações' : 'Adicionar Nota' }}</button>
+            <a routerLink="/notes" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</main>

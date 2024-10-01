@@ -1,0 +1,55 @@
+<main class="content">
+    <div class="container-fluid p-0">
+        <div class="container">
+
+            <div class="row mb-3 mt-3">
+                <h1 class="col align-self-start text-start">Lista de Notas</h1>
+                <button (click)="addNote()" class="btn btn-success col-lg-2 col align-self-end"><i class="fas fa-plus"></i>Adicionar Nota</button>
+
+            </div>
+
+            <div class="card-body">
+                <div *ngFor="let note of notes" class="card" style="max-width: 18rem;">
+                    <div class="card-header">
+                        {{ note.title }}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"> {{ note.tags.join(', ')}}</h5>
+                        <p class="card-text">{{ note.content }}</p>
+                        <div class="d-flex gap-2 justify-content-center">
+                            <button (click)="editNote(note); $event.stopPropagation()" class="btn btn-outline-warning">
+                                <i class="fa-regular fa-pen-to-square align-middle"></i>
+                            </button>
+                            <button (click)="deleteNote(note.id); $event.stopPropagation()" class="btn btn-outline-danger"><i class="align-middle fa-regular fa-trash-can"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-footer text-body-secondary">
+                        {{ note.createdAt | date: 'short' }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</main>
+
+<div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noteModalLabel">{{ noteToEdit ? 'Editar Nota' : 'Adicionar Nova Nota' }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-note-form *ngIf="showForm"
+                               [noteToEdit]="noteToEdit"
+                               (formSubmitted)="onFormSubmitted()"></app-note-form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
