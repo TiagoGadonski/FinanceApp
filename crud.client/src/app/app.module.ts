@@ -20,6 +20,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './components/home/home.component';
 import { NoteListComponent } from './components/note-list/note-list.component';
 import { NoteFormComponent } from './components/note-form/note-form.component';
+import { YoutubeVideosComponent } from './components/youtube-videos/youtube-videos.component';
+import { CryptoNewsComponent } from './components/crypto-news/crypto-news.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { NoteFormComponent } from './components/note-form/note-form.component';
     TaskFormComponent,
     HomeComponent,
     NoteListComponent,
-    NoteFormComponent
+    NoteFormComponent,
+    YoutubeVideosComponent,
+    CryptoNewsComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

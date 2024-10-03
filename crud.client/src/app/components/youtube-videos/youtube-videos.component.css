@@ -1,0 +1,30 @@
+/* youtube-videos.component.css */
+.videos-container {
+  padding: 20px;
+}
+
+.videos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.video-card {
+  width: calc(33.333% - 20px);
+  box-sizing: border-box;
+}
+
+  .video-card img {
+    width: 100%;
+    height: auto;
+  }
+
+  .video-card h3 {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  .video-card p {
+    font-size: 14px;
+    color: #555;
+  }

@@ -1,0 +1,30 @@
+/* crypto-news.component.css */
+.news-container {
+  padding: 20px;
+}
+
+.news-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.news-card {
+  width: calc(50% - 20px);
+  box-sizing: border-box;
+}
+
+  .news-card img {
+    width: 100%;
+    height: auto;
+  }
+
+  .news-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+
+  .news-card p {
+    font-size: 14px;
+    color: #555;
+  }

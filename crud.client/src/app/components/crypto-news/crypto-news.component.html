@@ -1,0 +1,12 @@
+<!-- crypto-news.component.html -->
+<div class="news-container">
+    <h2>Notícias de Criptomoedas</h2>
+    <div class="news-grid">
+        <div class="news-card" *ngFor="let article of articles">
+            <img [src]="article.urlToImage" alt="{{ article.title }}" *ngIf="article.urlToImage" />
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.description }}</p>
+            <a [href]="article.url" target="_blank">Leia Mais</a>
+        </div>
+    </div>
+</div>

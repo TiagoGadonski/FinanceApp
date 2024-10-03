@@ -30,54 +30,11 @@
 
 <div class="container" data-bs-theme="dark">
     <router-outlet></router-outlet>
-
-    <!-- Toast container to position the toast -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <!-- First Toast to show every 5 seconds -->
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
-            <div class="toast-body">
-                Hello, world! This is a toast message.
-                <div class="mt-2 pt-2 border-top">
-                    <button type="button" class="btn btn-primary btn-sm">Take action</button>
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-
-<!-- Additional Toasts -->
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
-        <div class="toast-header">
-            <img src="..." class="rounded me-2" alt="...">
-            <strong class="me-auto">Bootstrap</strong>
-            <small class="text-body-secondary">just now</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            See? Just like this.
-        </div>
-    </div>
-
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
-        <div class="toast-header">
-            <img src="..." class="rounded me-2" alt="...">
-            <strong class="me-auto">Bootstrap</strong>
-            <small class="text-body-secondary">2 seconds ago</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            Heads up, toasts will stack automatically
-        </div>
-    </div>
-</div>
-
-
 
 <!--          SIDEBAR           -->
 
-<button class="btn position-absolute bottom-0 start-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+<button class="btn sticky-bottom" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
     <img src="assets/logo white.png" class="card-img-top" alt="..." style="height: 60px;">
 </button>
 
@@ -127,4 +84,14 @@
 
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+    const triggerTabList = document.querySelectorAll('#myTab button')
+    triggerTabList.forEach(triggerEl => {
+        const tabTrigger = new bootstrap.Tab(triggerEl)
+
+        triggerEl.addEventListener('click', event => {
+            event.preventDefault()
+            tabTrigger.show()
+        })
+    })
 </script>

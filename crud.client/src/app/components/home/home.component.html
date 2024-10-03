@@ -4,14 +4,16 @@
             <h2 class="col align-self-start text-start">Próximas Contas a Pagar</h2>
             <a routerLink="/transactions/create" class="btn btn-success col-lg-2 col align-self-end"><i class="fas fa-plus"></i> Transação</a>
         </div>
-
-        <div *ngFor="let transaction of upcomingTransactions" class="card shadow" style="width: 18rem;">
-            <img src="assets/paybills.webp" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"> {{ transaction.description }} </h5>
-                <p class="card-text">Valor: {{ transaction.amount }} - Vencimento: {{ transaction.date | date:'shortDate' }}</p>
-                <a href="#" class="btn btn-primary">Pagar</a>
+        <div class="row row-cols-6 gap-3 justify-content-between">
+            <div *ngFor="let transaction of upcomingTransactions" class="card shadow col-md-2">
+                <img src="assets/paybills.webp" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"> {{ transaction.description }} </h5>
+                    <p class="card-text">Valor: {{ transaction.amount }} - Vencimento: {{ transaction.date | date:'shortDate' }}</p>
+                    <a href="#" class="btn btn-primary">Pagar</a>
+                </div>
             </div>
+
         </div>
     </div>
 
@@ -20,13 +22,14 @@
             <h2 class="col align-self-start text-start">Próximas Tarefas</h2>
             <a routerLink="/tasks/create" class="btn btn-primary col-lg-2 col align-self-end"><i class="fas fa-plus"></i> Task</a>
         </div>
-
-        <div *ngFor="let task of upcomingTasks" class="card shadow" style="width: 18rem; ">
-            <img src="assets/nexttasks.webp" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"> {{ task.title }}</h5>
-                <p class="card-text">Prazo: {{ task.dueDate | date:'shortDate' }}</p>
-                <a href="#" class="btn btn-primary">Fazer</a>
+        <div class="row row-cols-3 gap-3 justify-content-between">
+            <div *ngFor="let task of upcomingTasks" class="card shadow" style="width: 18rem; ">
+                <img src="assets/nexttasks.webp" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"> {{ task.title }}</h5>
+                    <p class="card-text">Prazo: {{ task.dueDate | date:'shortDate' }}</p>
+                    <a href="#" class="btn btn-primary">Fazer</a>
+                </div>
             </div>
         </div>
     </div>

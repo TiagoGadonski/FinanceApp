@@ -1,0 +1,12 @@
+<!-- youtube-videos.component.html -->
+<div class="videos-container">
+    <h2>Últimos Vídeos do Canal</h2>
+    <div class="videos-grid">
+        <div class="video-card" *ngFor="let video of videos">
+            <img [src]="video.snippet.thumbnails.medium.url" alt="{{ video.snippet.title }}" />
+            <h3>{{ video.snippet.title }}</h3>
+            <p>{{ video.snippet.description }}</p>
+            <a [href]="'https://www.youtube.com/watch?v=' + video.id.videoId" target="_blank">Assistir no YouTube</a>
+        </div>
+    </div>
+</div>
