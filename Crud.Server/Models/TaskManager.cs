@@ -74,6 +74,7 @@ namespace Crud.Server.Models
     }
 
     // Enum para priorizar tarefas
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum PriorityLevel
     {
         High,

@@ -45,7 +45,7 @@ namespace Crud.Server.Controllers
 
         // POST: api/TaskManagers
         [HttpPost]
-        public async Task<ActionResult<TaskManager>> PostTaskManager(TaskManager taskManager)
+        public async Task<ActionResult<TaskManager>> PostTaskManager([FromBody] TaskManager taskManager)
         {
             // Validar as Tags
             if (taskManager.Tags != null && taskManager.Tags.Any())
@@ -67,7 +67,7 @@ namespace Crud.Server.Controllers
 
         // PUT: api/TaskManagers/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTaskManager(int id, TaskManager taskManager)
+        public async Task<IActionResult> PutTaskManager(int id, [FromBody] TaskManager taskManager)
         {
             if (id != taskManager.TaskId)
             {

@@ -25,6 +25,8 @@ export class TaskFormComponent implements OnInit {
 
   isEditMode = false;
   TaskStatus = TaskStatus;
+  PriorityLevel = PriorityLevel;
+  newTag: string = '';
 
   constructor(
     private taskService: TaskManagerService,
@@ -38,7 +40,15 @@ export class TaskFormComponent implements OnInit {
       this.isEditMode = true;
       this.taskService.getTaskById(+id).subscribe(task => {
         this.task = task;
+        if (!this.task.tags) {
+          this.task.tags = [];
+        }
       });
+    } else {
+      // Inicializar a lista de tags para uma nova tarefa
+      if (!this.task.tags) {
+        this.task.tags = [];
+      }
     }
   }
 
@@ -52,5 +62,20 @@ export class TaskFormComponent implements OnInit {
         this.router.navigate(['/tasks']);
       });
     }
+  }
+
+  addTag(event: Event): void {
+    event.preventDefault();
+    const tag = this.newTag.trim();
+    console.log('Tentando adicionar tag:', tag);
+    if (tag && !this.task.tags.includes(tag)) {
+      this.task.tags.push(tag);
+      console.log('Tag adicionada:', this.task.tags);
+    }
+    this.newTag = '';
+  }
+
+  removeTag(index: number): void {
+    this.task.tags.splice(index, 1);
   }
 }

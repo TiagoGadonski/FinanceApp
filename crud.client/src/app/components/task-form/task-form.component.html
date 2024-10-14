@@ -21,21 +21,38 @@
             </div>
 
             <div class="form-group">
+                <label for="tags">Tags</label>
+                <div class="tags-input">
+                    <span class="tag badge text-bg-info ms-1" *ngFor="let tag of task.tags; let i = index">
+                        {{ tag }}
+                        <button type="button" class="btn btn-sm btn-danger" (click)="removeTag(i)">×</button>
+                    </span>
+                    <input type="text"
+                           [(ngModel)]="newTag"
+                           name="tagInput"
+                           [ngModelOptions]="{standalone: true}"
+                           (keydown.enter)="addTag($event)"
+                           placeholder="Pressione Enter para adicionar"
+                           class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label for="priority">Prioridade</label>
                 <select id="priority" [(ngModel)]="task.priority" name="priority" class="form-control">
-                    <option [value]="0">Alta</option>
-                    <option [value]="1">Média</option>
-                    <option [value]="2">Baixa</option>
+                    <option [ngValue]="PriorityLevel.High">Alta</option>
+                    <option [ngValue]="PriorityLevel.Medium">Média</option>
+                    <option [ngValue]="PriorityLevel.Low">Baixa</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="status">Status</label>
                 <select id="status" [(ngModel)]="task.status" name="status" class="form-control">
-                    <option [value]="TaskStatus.Pending">Pendente</option>
-                    <option [value]="TaskStatus.InProgress">Em Andamento</option>
-                    <option [value]="TaskStatus.Completed">Concluída</option>
-                    <option [value]="TaskStatus.Canceled">Cancelada</option>
+                    <option [ngValue]="TaskStatus.Pending">Pendente</option>
+                    <option [ngValue]="TaskStatus.InProgress">Em Andamento</option>
+                    <option [ngValue]="TaskStatus.Completed">Concluída</option>
+                    <option [ngValue]="TaskStatus.Canceled">Cancelada</option>
                 </select>
             </div>
 
