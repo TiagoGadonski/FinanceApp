@@ -1,97 +1,140 @@
-<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body text-uppercase fw-bold fs-6 px-4">
-    <a class="navbar-brand text-white" routerLink="/"><img src="assets/logo white.png" class="card-img-top" alt="..." style="height: 60px;"></a>
+<!-- Navbar Principal -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-body text-uppercase fw-bold fs-6 px-4">
+    <a class="navbar-brand" routerLink="/">
+        <img src="assets/logo white.png" class="logo-img" alt="Logo Andromeda">
+    </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="nav nav-tabs nav-fill">
+        <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a class="nav-link text-white active" routerLink="/">Home</a>
+                <a class="nav-link text-white" routerLink="/" routerLinkActive="active" aria-current="page">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" routerLink="/categories">Categories</a>
+                <a class="nav-link text-white" routerLink="/categories" routerLinkActive="active">Categories</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" routerLink="/transactions">Transactions</a>
+                <a class="nav-link text-white" routerLink="/transactions" routerLinkActive="active">Transactions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" routerLink="/shoppingitems">Shopping Items</a>
+                <a class="nav-link text-white" routerLink="/shoppingitems" routerLinkActive="active">Shopping Items</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" routerLink="/tasks">Tasks</a>
+                <a class="nav-link text-white" routerLink="/tasks" routerLinkActive="active">Tasks</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" routerLink="/notes">Notes</a>
+                <a class="nav-link text-white" routerLink="/notes" routerLinkActive="active">Notes</a>
             </li>
         </ul>
     </div>
 </nav>
 
+<!-- Conteúdo Principal -->
 <div class="container" data-bs-theme="dark">
     <router-outlet></router-outlet>
 </div>
 
-<!--          SIDEBAR           -->
-
-<button class="btn sticky-bottom" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
-    <img src="assets/logo white.png" class="card-img-top" alt="..." style="height: 60px;">
+<!-- Botão para Sidebar -->
+<button class="btn btn-primary fixed-bottom start-50 translate-middle-x mb-3" type="button"
+        data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar" aria-label="Abrir Sidebar">
+    <img src="assets/logo white.png" class="logo-img" alt="Logo Andromeda">
 </button>
 
-<nav class="navbar offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-    <div class="offcanvas-header d-flex justify-content-between">
-        <h5 class="offcanvas-title" id="offcanvasScrollingLabel"><a class="navbar-brand text-white" routerLink="/"><img src="assets/logo white.png" class="card-img-top" alt="..." style="height: 60px;"></a></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<!-- Sidebar Offcanvas -->
+<nav class="offcanvas offcanvas-start bg-dark text-white" data-bs-scroll="true" data-bs-backdrop="false"
+     tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasSidebarLabel">
+            <a class="navbar-brand text-white" routerLink="/">
+                <img src="assets/logo white.png" class="logo-img" alt="Logo Andromeda">
+            </a>
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                aria-label="Fechar Sidebar"></button>
     </div>
-    <div class="offcanvas-body justify-content-end">
-        <ul class="navbar-nav grid gap-3 flex-grow-1 pe-3">
-            <li class="nav-item">
-                <a class="nav-link d-flex hover-effect active" data-bs-toggle="tooltip" data-bs-title="Home" routerLink="/"><i class="fa-solid nav-icon me-3 fa-house-chimney"></i>Home</a>
+    <div class="offcanvas-body">
+        <ul class="navbar-nav flex-column">
+            <li class="nav-item mb-3">
+                <a class="nav-link d-flex align-items-center hover-effect text-danger fs-4" title="Home" aria-label="Home" routerLink="/" routerLinkActive="active">
+                    <i class="fa-solid fa-house-chimney me-2"></i> Home
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link d-flex hover-effect" data-bs-toggle="tooltip" data-bs-title="Categories" routerLink="/categories"><i class="fa-solid nav-icon me-3 fa-layer-group"></i>Categories</a>
+            <li class="nav-item mb-3">
+                <a class="nav-link d-flex align-items-center hover-effect fs-4" title="Categories" aria-label="Categories" routerLink="/categories" routerLinkActive="active">
+                    <i class="fa-solid fa-layer-group me-2"></i> Categories
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link d-flex hover-effect" data-bs-toggle="tooltip" data-bs-title="Transactions" routerLink="/transactions"><i class="fa-solid nav-icon me-3 fa-cash-register"></i> Transactions</a>
+            <li class="nav-item mb-3">
+                <a class="nav-link d-flex align-items-center hover-effect fs-4" title="Transactions" aria-label="Transactions" routerLink="/transactions" routerLinkActive="active">
+                    <i class="fa-solid fa-cash-register me-2"></i> Transactions
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link d-flex hover-effect" data-bs-toggle="tooltip" data-bs-title="Shopping Items" routerLink="/shoppingitems"><i class="fa-solid nav-icon me-3 fa-basket-shopping"></i>ShoppingItems</a>
+            <li class="nav-item mb-3">
+                <a class="nav-link d-flex align-items-center hover-effect fs-4" title="Shopping Items" aria-label="Shopping Items" routerLink="/shoppingitems" routerLinkActive="active">
+                    <i class="fa-solid fa-basket-shopping me-2"></i> Shopping Items
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link d-flex hover-effect" data-bs-toggle="tooltip" data-bs-title="Tasks" routerLink="/tasks"><i class="fa-solid nav-icon me-3 fa-list-check"></i>Tasks</a>
+            <li class="nav-item mb-3">
+                <a class="nav-link d-flex align-items-center hover-effect fs-4" title="Tasks" aria-label="Tasks" routerLink="/tasks" routerLinkActive="active">
+                    <i class="fa-solid fa-list-check me-2"></i> Tasks
+                </a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link d-flex align-items-center hover-effect fs-4" title="Notes" aria-label="Notes" routerLink="/notes" routerLinkActive="active">
+                    <i class="fa-solid fa-sticky-note me-2"></i> Notes
+                </a>
             </li>
         </ul>
     </div>
 </nav>
 
+<!-- Estilos Personalizados -->
+<style>
+    .logo-img {
+        height: 60px;
+    }
+
+    .hover-effect:hover {
+        text-decoration: none;
+        color: #f00; /* Exemplo de efeito hover */
+    }
+
+    /* Ajustes para botões e sidebar */
+    .fixed-bottom {
+        position: fixed;
+        bottom: 20px;
+    }
+</style>
+
+<!-- Scripts -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const toastLiveExample = document.getElementById('liveToast');
-
+        // Inicializar Toast, se existir
+            const toastLiveExample = document.getElementById('liveToast');
         if (toastLiveExample) {
             const toastBootstrap = new bootstrap.Toast(toastLiveExample, { autohide: false });
-
-            // Exibir o toast a cada 5 segundos (5000ms)
-            setInterval(() => {
+                setInterval(() => {
                 toastBootstrap.show();
             }, 5000);
-        }
+            }
 
-        // Inicializando tooltips (se necessário)
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        // Inicializar Tooltips
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"], [title]');
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
-    });
+        });
 
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
-
-    const triggerTabList = document.querySelectorAll('#myTab button')
+    // Inicializar Tabs, se estiverem presentes
+        const triggerTabList = document.querySelectorAll('#myTab button');
     triggerTabList.forEach(triggerEl => {
-        const tabTrigger = new bootstrap.Tab(triggerEl)
+        const tabTrigger = new bootstrap.Tab(triggerEl);
 
         triggerEl.addEventListener('click', event => {
-            event.preventDefault()
-            tabTrigger.show()
-        })
-    })
+            event.preventDefault();
+            tabTrigger.show();
+            });
+        });
 </script>

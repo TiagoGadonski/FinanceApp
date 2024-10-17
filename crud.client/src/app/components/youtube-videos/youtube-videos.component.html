@@ -8,5 +8,9 @@
             <p>{{ video.snippet.description }}</p>
             <a [href]="'https://www.youtube.com/watch?v=' + video.id.videoId" target="_blank">Assistir no YouTube</a>
         </div>
+
+        <div *ngIf="videos.length === 0">
+            Não foi possível carregar os vídeos.
+        </div>
     </div>
 </div>

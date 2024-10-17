@@ -8,5 +8,9 @@
             <p>{{ article.description }}</p>
             <a [href]="article.url" target="_blank">Leia Mais</a>
         </div>
+
+        <div *ngIf="articles.length === 0">
+            Não há noticias a serem mostradas.
+        </div>
     </div>
 </div>

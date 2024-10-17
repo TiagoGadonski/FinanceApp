@@ -11,6 +11,7 @@ import { TaskFormComponent } from './components/task-form/task-form.component';
 import { HomeComponent } from './components/home/home.component';
 import { NoteFormComponent } from './components/note-form/note-form.component';
 import { NoteListComponent } from './components/note-list/note-list.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 // Definindo as rotas
 const routes: Routes = [
@@ -29,8 +30,8 @@ const routes: Routes = [
   { path: 'notes', component: NoteListComponent },
   { path: 'notes/create', component: NoteFormComponent },
   { path: 'notes/edit/:id', component: NoteFormComponent },
-  { path: '', component: HomeComponent },  // Define a rota inicial como HomeComponent
-  { path: '**', redirectTo: '' }
+  { path: '', component: HomeComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 

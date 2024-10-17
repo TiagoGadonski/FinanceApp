@@ -13,7 +13,7 @@ import { CategoryFormComponent } from './components/category-form/category-form.
 import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
 import { TransactionFormComponent } from './components/transaction-form/transaction-form.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
-import { TaskFormComponent } from './components/task-form/task-form.component';  // Adicione essa linha
+import { TaskFormComponent } from './components/task-form/task-form.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -22,6 +22,7 @@ import { NoteListComponent } from './components/note-list/note-list.component';
 import { NoteFormComponent } from './components/note-form/note-form.component';
 import { YoutubeVideosComponent } from './components/youtube-videos/youtube-videos.component';
 import { CryptoNewsComponent } from './components/crypto-news/crypto-news.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -38,12 +39,13 @@ import { CryptoNewsComponent } from './components/crypto-news/crypto-news.compon
     NoteListComponent,
     NoteFormComponent,
     YoutubeVideosComponent,
-    CryptoNewsComponent
+    CryptoNewsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
     AppRoutingModule, FormsModule,
-    BrowserAnimationsModule, // Necessário para animações
+    BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule
   ],

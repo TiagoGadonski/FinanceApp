@@ -1,34 +1,78 @@
-<main class="container">
-    <div class="shadow p-4 mb-4 mt-4 bg-body-tertiary rounded">
-        <div class="row mb-3 mt-3">
-            <h2 class="col align-self-start text-start">Próximas Contas a Pagar</h2>
-            <a routerLink="/transactions/create" class="btn btn-success col-lg-2 col align-self-end"><i class="fas fa-plus"></i> Transação</a>
-        </div>
-        <div class="row row-cols-6 gap-3 justify-content-between">
-            <div *ngFor="let transaction of upcomingTransactions" class="card shadow col-md-2">
-                <img src="assets/paybills.webp" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title"> {{ transaction.description }} </h5>
-                    <p class="card-text">Valor: {{ transaction.amount }} - Vencimento: {{ transaction.date | date:'shortDate' }}</p>
-                    <a href="#" class="btn btn-primary">Pagar</a>
-                </div>
+<main class="container my-4">
+    <div class="row g-4">
+        <!-- Próximas Contas a Pagar -->
+        <div class="col-lg-8">
+            <div class="card shadow bg-body-tertiary h-100">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="card-title mb-0">Próximas Contas a Pagar</h4>
+                        <a routerLink="/transactions/create" class="btn btn-success">
+                            <i class="fas fa-plus me-2" aria-hidden="true"></i> Transação
+                        </a>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 flex-grow-1">
+                        <div *ngFor="let transaction of upcomingTransactions; trackBy: trackByTransactionId"
+                             class="col">
+                            <div class="card h-100">
+                                <img src="assets/paybills.webp"
+                                     class="card-img-top"
+                                     alt="Ilustração de contas a pagar" />
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">{{ transaction.description }}</h5>
+                                    <p class="card-text mb-4">
+                                        Valor: {{ transaction.amount | currency:'BRL' }}<br />
+                                        Vencimento: {{ transaction.date | date:'shortDate' }}
+                                    </p>
+                                    <a href="#"
+                                       class="btn btn-primary mt-auto">
+                                        Pagar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="upcomingTransactions.length === 0" class="col">
+                            Não há próximos pagamentos.
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <app-crypto-news></app-crypto-news>
+                        </div>
+                    </div>
             </div>
-
         </div>
-    </div>
 
-    <div class="shadow p-4 mb-4 mt-4 bg-body-tertiary rounded">
-        <div class="row mb-3 mt-3">
-            <h2 class="col align-self-start text-start">Próximas Tarefas</h2>
-            <a routerLink="/tasks/create" class="btn btn-primary col-lg-2 col align-self-end"><i class="fas fa-plus"></i> Task</a>
-        </div>
-        <div class="row row-cols-3 gap-3 justify-content-between">
-            <div *ngFor="let task of upcomingTasks" class="card shadow" style="width: 18rem; ">
-                <img src="assets/nexttasks.webp" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title"> {{ task.title }}</h5>
-                    <p class="card-text">Prazo: {{ task.dueDate | date:'shortDate' }}</p>
-                    <a href="#" class="btn btn-primary">Fazer</a>
+        <!-- Próximas Tarefas -->
+        <div class="col-lg-4">
+            <div class="card shadow bg-body-tertiary h-100">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="card-title mb-0">Próximas Tarefas</h4>
+                        <a routerLink="/tasks/create" class="btn btn-sm btn-primary">
+                            <i class="fas fa-plus" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <ul class="list-group list-group-flush flex-grow-1">
+                        <li *ngFor="let task of upcomingTasks; trackBy: trackByTaskId"
+                            class="list-group-item">
+                            <a [routerLink]="['/tasks/edit', task.taskId]"
+                               class="text-decoration-none d-block">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-1">{{ task.title }}</h5>
+                                    <small class="text-muted">
+                                        {{ task.dueDate | date:'shortDate' }}
+                                    </small>
+                                </div>
+                                <p class="mb-1">{{ task.description }}</p>
+                                <small class="text-muted">Prioridade: {{ task.priority }}</small>
+                            </a>
+                        </li>
+                        <li *ngIf="upcomingTasks.length === 0" class="list-group-item">
+                            Nenhuma tarefa pendente.
+                        </li>
+                    </ul>
+                    <div class="mt-4">
+                        <app-youtube-videos></app-youtube-videos>
+                    </div>
                 </div>
             </div>
         </div>

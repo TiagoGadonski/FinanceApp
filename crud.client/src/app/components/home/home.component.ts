@@ -34,4 +34,13 @@ export class HomeComponent implements OnInit {
       this.upcomingTasks = tasks;
     });
   }
+
+  trackByTransactionId(index: number, transaction: any): number {
+    return transaction.id; // Assumindo que cada transação tem um 'id'
+  }
+
+  // Função trackBy para tarefas
+  trackByTaskId(index: number, task: any): number {
+    return task.taskId; // Assumindo que cada tarefa tem um 'taskId'
+  }
 }

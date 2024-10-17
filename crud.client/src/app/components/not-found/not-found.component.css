@@ -1,0 +1,27 @@
+/* not-found.component.css */
+.not-found-container {
+  text-align: center;
+  padding: 50px;
+}
+
+  .not-found-container h1 {
+    font-size: 120px;
+    color: #f44336;
+    margin-bottom: 20px;
+  }
+
+  .not-found-container h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  .not-found-container p {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  .not-found-container a.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+  }
