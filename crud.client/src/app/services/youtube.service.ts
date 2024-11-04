@@ -22,8 +22,8 @@ export interface YouTubeVideo {
   providedIn: 'root',
 })
 export class YoutubeService {
-  private apiKey = 'SUA_API_KEY';
-  private channelId = 'SEU_CHANNEL_ID';
+  private apiKey = 'AIzaSyDaFKGzrneu7hzS_ev4zhh6P-rMu4vRHLw';
+  private channelId = 'UCetuVR2XArtTXOoUtjz3DQA';
   private apiUrl = 'https://www.googleapis.com/youtube/v3';
 
   constructor(private http: HttpClient) { }
